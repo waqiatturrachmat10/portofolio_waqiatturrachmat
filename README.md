@@ -1,6 +1,6 @@
 # Portofolio Waqiat Tur Rachmat
 
-Ini adalah proyek portofolio pribadi untuk menampilkan profil, keterampilan, pengalaman, proyek, dan sertifikat. Proyek ini dibangun menggunakan **PHP**, **HTML**, **CSS**, dan **JavaScript**.
+Ini adalah proyek portofolio pribadi untuk menampilkan profil, keterampilan, pengalaman, proyek, dan sertifikat. Proyek ini dibangun menggunakan **HTML**, **CSS**, dan **JavaScript**.
 
 ## Fitur
 
