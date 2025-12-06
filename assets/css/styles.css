@@ -1,0 +1,565 @@
+/* ...existing code moved from index.php <style> ... */
+:root{
+  --bg-1: #f8fbff;
+  --bg-2: #eef7ff;
+  --accent-600: #0b75b9;
+  --accent-700: #045a88;
+  --accent-800: #033b5e;
+  --glass: rgba(255,255,255,0.6);
+  --card-shadow: 0 8px 30px rgba(2,6,23,0.08);
+}
+
+/* teks hover animation (ketika cursor menghampiri tulisan) */
+h1,h2,h3,h4,p,nav a,.proj-badge,.btn-ghost {
+  transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
+  will-change: transform;
+  cursor: default;
+}
+h1:hover,h2:hover,h3:hover,h4:hover,p:hover,nav a:hover,.proj-badge:hover,.btn-ghost:hover {
+  transform: translateY(-6px);
+  color: var(--accent-800);
+  text-shadow: 0 10px 30px rgba(3,57,90,0.06);
+}
+
+/* NAV buttons */
+.nav-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:10px;
+  background:transparent; border:1px solid transparent; color:#19455a;
+  font-weight:600; transition: transform .16s ease, background .16s ease, box-shadow .16s;
+}
+.nav-btn:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(90deg,var(--accent-700), var(--accent-600));
+  color: #fff; box-shadow: 0 12px 36px rgba(3,57,90,0.12);
+}
+
+/* Background: soft radial + subtle grid for depth */
+body {
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(14,165,233,0.06), transparent 8%),
+              radial-gradient(900px 400px at 90% 90%, rgba(3,105,161,0.04), transparent 8%),
+              linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color: #06202b;
+  min-height:100vh;
+}
+
+/* Glass card base */
+.glass { background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.80)); box-shadow: var(--card-shadow); border-radius: 14px; border: 1px solid rgba(2,6,23,0.035); }
+
+/* center avatar placement (lebih besar, berada di tengah bawah header) */
+.center-avatar { display:flex; justify-content:center; margin-top:-8px; z-index:20; position:relative; }
+#avatarWrap { transform-style: preserve-3d; transition: transform 320ms cubic-bezier(.2,.9,.2,1), box-shadow 320ms; border-radius: 999px; width:220px; height:220px; display:inline-grid; place-items:center; }
+#avatar { transition: transform 420ms cubic-bezier(.2,.9,.2,1), filter 420ms; border-radius: 999px; width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Header gradient bar */
+.brand-accent { background: linear-gradient(90deg, var(--accent-700), var(--accent-600)); color: white; padding: 4px 10px; border-radius: 999px; font-weight:600; font-size:13px; display:inline-flex; gap:8px; align-items:center; box-shadow: 0 6px 20px rgba(3,105,161,0.09); }
+
+/* Avatar ring */
+.avatar-ring { position:absolute; inset: -6px; border-radius:999px; background: conic-gradient(from 120deg, rgba(14,165,233,0.9), rgba(3,105,161,0.7), rgba(14,165,233,0.9)); filter: blur(8px); opacity:0.85; transform: rotate(10deg); transition: opacity .4s, transform .5s; z-index:0; }
+
+/* Cards & projects */
+.card { transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s; will-change: transform; }
+.card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 20px 45px rgba(2,6,23,0.12); }
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg,var(--accent-800), var(--accent-600));
+  color: white; border: none; padding: .6rem 1.1rem; border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(3,105,161,0.14);
+  transition: transform .18s, box-shadow .18s, filter .18s;
+}
+.btn-primary:hover { transform: translateY(-4px); filter: brightness(1.04); box-shadow: 0 22px 50px rgba(3,105,161,0.18); }
+.btn-ghost { background: transparent; border: 1px solid rgba(3,105,161,0.08); color: var(--accent-800); padding:.55rem .95rem; border-radius:10px; }
+
+/* contact list (modern, hover) */
+.contact-list { margin-top:12px; display:flex; gap:10px; flex-direction:column; max-width:360px; }
+.contact-item {
+  display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:10px;
+  background:#fff; border:1px solid rgba(2,6,23,0.04); transition: transform .14s ease, box-shadow .14s ease, background .14s;
+}
+.contact-item:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(3,57,90,0.06); background: linear-gradient(90deg, rgba(3,90,130,0.03), rgba(11,117,185,0.02)); color:var(--accent-800); }
+.contact-item span { font-weight:600; color:#274754; }
+
+/* subtle text gradient for headings */
+.heading-deco { background: linear-gradient(90deg, #052d4a, var(--accent-700)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* reveal + stagger animation */
+.reveal { opacity: 0; transform: translateY(14px) scale(.995); transition: opacity 520ms cubic-bezier(.2,.9,.2,1), transform 520ms cubic-bezier(.2,.9,.2,1); }
+.reveal.is-visible { opacity:1; transform:none; }
+
+/* project overlay micro animation */
+.proj-badge { font-size:12px; padding:6px 8px; border-radius:8px; background: rgba(3,105,161,0.08); color: var(--accent-800); display:inline-flex; gap:8px; align-items:center; }
+
+/* contact inputs */
+.input { background: #fff; border: 1px solid rgba(2,6,23,0.06); padding:.7rem; border-radius:10px; transition: box-shadow .16s, transform .16s; }
+.input:focus { outline: none; box-shadow: 0 8px 30px rgba(3,105,161,0.08); transform: translateY(-2px); }
+
+/* footer wave */
+.footer-wave { fill: white; opacity: .9; }
+
+/* skill icons grid + micro-interaction */
+.skill-grid { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-start; }
+.skill {
+  width:92px; min-width:92px; height:110px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border-radius:12px; background:#fff; border:1px solid rgba(2,6,23,0.04);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s;
+  padding:10px;
+  background: linear-gradient(180deg, #fff, #f6fbff);
+}
+.skill img { width:44px; height:44px; display:block; }
+.skill:hover { transform: translateY(-8px) scale(1.03); box-shadow: 0 18px 42px rgba(2,6,23,0.08); }
+.skill-label { font-size:12px; margin-top:8px; color:#28414f; text-align:center; }
+
+/* header animated name/title */
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 6px;                /* jarak antar elemen header */
+  align-items: flex-start;
+  padding-bottom: 6px;     /* sedikit ruang bawah agar CV button tidak rapat */
+}
+.header-name {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 16px;         /* ukuran dikurangi agar tidak mendominasi */
+  color: #06202b;
+  margin: 0;
+}
+.header-title {
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--accent-800);
+  margin: 0;
+  padding-top: 6px;        /* geser sedikit ke bawah — tidak menimpa */
+  transform: translateY(2px);
+  letter-spacing: 0.6px;
+  z-index: 1;
+}
+
+/* Shimmer / glossy animated highlight for header name & title */
+.header-name, .header-title {
+  position: relative;
+  overflow: hidden;
+}
+
+/* moving glossy stripe */
+.header-name::after,
+.header-title::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.55) 50%,
+    rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg);
+  filter: blur(6px);
+  opacity: 0.95;
+  pointer-events: none;
+  animation: shimmer 2.2s linear infinite;
+}
+
+/* slightly different timing for second line for natural effect */
+.header-title::after { animation-duration: 2.6s; animation-delay: 0.12s; }
+
+/* keyframes */
+@keyframes shimmer {
+  0%   { left: -60%; }
+  100% { left: 140%; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .header-name::after,
+  .header-title::after {
+    animation: none;
+    display: none;
+  }
+}
+
+/* tweak reveal timing for header */
+.header-name.reveal, .header-title.reveal { transition-delay:120ms; }
+
+/* about card: center, wider, text centered and nicer font */
+.about-card-container {
+  max-width:1100px;
+  margin: 6px auto;
+  position: relative;
+  padding-top: 14px; /* beri ruang untuk tombol CV */
+}
+.about-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 18px;         /* lebih ringkas agar card tidak terlalu tinggi */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;    /* isi dimulai dari atas, bukan center */
+  text-align: justify;
+  max-height: 380px;          /* batasi tinggi agar card tidak ambles */
+  overflow: auto;             /* scroll bila konten melebihi batas */
+}
+.about-card h2 { text-align:center; font-weight:800; }
+.about-text { max-width:880px; color:var(--text-900); font-weight:500; }
+
+/* kecilkan sedikit pada layar sempit agar muat rapi */
+@media (max-width: 480px) {
+  .about-text { font-size: 0.98rem; line-height: 1.6; }
+}
+
+/* NEW: hoverable baseline + proximity hover class */
+.hoverable {
+  transition: transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s, background .18s, color .12s;
+  will-change: transform, box-shadow;
+}
+.hoverable:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(2,6,23,0.08);
+}
+
+/* class toggled by JS when cursor near */
+.hoverable.is-hover-prox {
+  transform: translateY(-8px) scale(1.035);
+  box-shadow: 0 22px 56px rgba(2,6,23,0.12);
+}
+
+/* About text justified */
+.about-text {
+  text-align: justify;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-size:1.02rem;
+  color:#274754;
+  line-height:1.7;
+  margin:0 auto;
+}
+
+/* Ensure Principles (Skill Tambahan) & Skills cards have equal height and centered content */
+.pr-sk-container { max-width:980px; margin: 18px auto 0; align-items:start; }
+.pr-sk-container > div { display:flex; flex-direction:column; justify-content:flex-start; min-height:320px; }
+.pr-sk-container .glass { padding:18px; display:flex; flex-direction:column; gap:12px; }
+
+/* make skill grid fill card vertically and center icons */
+.skill-grid { display:flex; flex-wrap:wrap; justify-content:center; align-content:center; gap:14px; flex:1; }
+
+/* ensure individual cards content vertically centered where appropriate */
+.pr-sk-container .space-y-2 { display:flex; flex-direction:column; justify-content:center; flex:1; padding:6px; }
+
+/* keep responsiveness */
+@media (max-width:768px) {
+  .pr-sk-container > div { min-height: auto; }
+}
+
+/* Responsive tweaks: make layout adapt across screen sizes */
+
+/* Container fluidity */
+@media (max-width: 1280px) {
+  .max-w-6xl { padding-left: 20px; padding-right: 20px; }
+}
+
+/* Header: stack on small screens and make nav wrap */
+@media (max-width: 768px) {
+  header.max-w-6xl {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-bottom: 12px;
+  }
+
+  /* force nav visible on mobile and make it wrap */
+  header nav {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-start;
+    margin-top: 6px;
+  }
+  header nav .nav-btn {
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* left header block shrink */
+  .header-left { display:flex; align-items:center; gap:10px; }
+  .header-brand { gap:4px; }
+
+  /* avatar smaller on phones */
+  #avatarWrap { width:150px; height:150px; }
+  .center-avatar { margin-top: -2px; }
+
+  /* About card spacing */
+  .about-card-container { padding-top: 12px; }
+  .about-card { padding: 18px; }
+  .about-text { font-size: 0.98rem; line-height: 1.6; }
+
+  /* stack PR/SK cards */
+  .pr-sk-container { grid-template-columns: 1fr; gap: 12px; }
+  .pr-sk-container > div { min-height: auto; }
+
+  /* Projects grid -> 1 column on very small, 2 on tablet */
+  .mt-4.grid.md\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0,1fr)); }
+  @media (min-width: 640px) { .mt-4.grid.md\:grid-cols-3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+  /* Certificates grid -> single column */
+  .mt-4.grid.grid-cols-1.sm\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0,1fr)); }
+  @media (min-width: 640px) { .mt-4.grid.grid-cols-1.sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+  /* Skill grid: shrink icons + wrap */
+  .skill-grid { gap: 10px; justify-content: flex-start; }
+  .skill { width:76px; height:88px; padding:8px; }
+}
+
+/* Tablet / small desktop adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .center-avatar { margin-top: -6px; }
+  #avatarWrap { width:190px; height:190px; }
+  .pr-sk-container { grid-template-columns: 1fr 1fr; gap: 14px; }
+  .skill { width:82px; height:94px; }
+  .about-card { padding: 22px; }
+}
+
+/* Equal-height cards and better centering for all sizes */
+.pr-sk-container > div { display:flex; flex-direction:column; justify-content:flex-start; }
+.pr-sk-container .glass { display:flex; flex-direction:column; gap:14px; }
+.pr-sk-container .glass > h3 { margin-bottom: 6px; }
+
+/* Projects: responsive card behaviour */
+a.block.p-5.bg-white.rounded-lg { display:flex; flex-direction:column; justify-content:space-between; height:100%; }
+
+/* Certificate viewer: responsive caps for modal */
+.cert-modal-panel { width:min(1100px, 94%); height:min(820px, 86%); }
+@media (max-width: 1024px) {
+  .cert-modal-panel { width:95%; height:82%; }
+}
+
+/* Improve touch target sizes on mobile */
+button, .nav-btn, .contact-item, .btn-primary, .btn-ghost { touch-action: manipulation; }
+
+/* Images and embeds fluid */
+img, object, iframe { max-width:100%; height:auto; }
+
+/* Reduce excessive shadows on small screens for readability */
+@media (max-width: 480px) {
+  .glass, .card { box-shadow: 0 6px 18px rgba(2,6,23,0.06); }
+  .hoverable:hover, .hoverable.is-hover-prox { transform: none; box-shadow: none; }
+}
+
+/* Respect reduced motion for all added responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* small utility: center content for two-column sections on narrower screens */
+@media (max-width: 900px) {
+  .pr-sk-container, .mt-4.grid.md\:grid-cols-3 { justify-items: center; }
+}
+
+/* End responsive tweaks */
+
+/* Certificate modal */
+.cert-modal { display:none; position:fixed; inset:0; z-index:9999; align-items:center; justify-content:center; }
+.cert-modal.is-open { display:flex; }
+.cert-modal-backdrop { position:absolute; inset:0; background:rgba(4,22,35,0.55); backdrop-filter: blur(4px); }
+.cert-modal-panel {
+  position:relative; z-index:2;
+  width:min(1100px, 94%); height:min(820px, 86%);
+  background: #fff; border-radius:12px; box-shadow:0 30px 80px rgba(2,6,23,0.35);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.cert-modal-close {
+  position:absolute; right:12px; top:10px; z-index:3;
+  background:transparent; border:0; font-size:28px; line-height:1; color:#0b3b50; cursor:pointer;
+  padding:6px 10px; border-radius:8px;
+  transition: transform .14s, background .14s;
+}
+.cert-modal-close:hover { transform: translateY(-3px); background: rgba(3,57,90,0.06); }
+.cert-modal-body { flex:1; display:flex; align-items:center; justify-content:center; padding:16px; background:linear-gradient(180deg,#fff,#fbfeff); }
+
+/* viewer styles */
+.cert-modal-body iframe,
+.cert-modal-body object,
+.cert-modal-body img {
+  max-width:100%; max-height:100%; width:100%; height:100%; border:0; display:block; border-radius:6px;
+}
+
+/* small responsive tweaks */
+@media (max-width:640px) {
+  .cert-modal-panel { width:94%; height:82%; }
+  .cert-modal-close { font-size:22px; top:6px; right:8px; }
+}
+
+/* Modern, elegant & simple card refinements + darker text */
+:root {
+  --text-900: #071422; /* very dark slate for stronger contrast */
+  --muted: #52656c;
+  --card-bg: #ffffff;
+  --card-radius: 14px;
+  --card-elev: 0 18px 45px rgba(7,20,34,0.08);
+  --accent: linear-gradient(90deg,var(--accent-700),var(--accent-600));
+}
+
+/* Global text color stronger (more "hitam") */
+body {
+  color: var(--text-900);
+  font-family: 'Poppins', 'Inter', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Headings heavier and clear */
+h1, h2, h3, h4 {
+  color: var(--text-900);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Subhead / small text */
+.text-slate-500, .text-sm { color: var(--muted); }
+
+/* Unified modern card style used by projects, experience, about */
+.card, .glass, .about-card, .p-4.bg-white.rounded {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-elev);
+  border: 1px solid rgba(7,20,34,0.04);
+  transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+}
+
+/* Slight lift on hover (subtle & elegant) */
+.card:hover, .glass:hover, .about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 26px 64px rgba(7,20,34,0.12);
+}
+
+/* ABOUT card specific: cleaner layout */
+.about-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 18px;         /* lebih ringkas agar card tidak terlalu tinggi */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;    /* isi dimulai dari atas, bukan center */
+  text-align: justify;
+  max-height: 380px;          /* batasi tinggi agar card tidak ambles */
+  overflow: auto;             /* scroll bila konten melebihi batas */
+}
+.about-card h2 { text-align:center; font-weight:800; }
+.about-text { max-width:880px; color:var(--text-900); font-weight:500; }
+
+/* PROJECT card refinements */
+a.block.p-5.bg-white.rounded-lg {
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  height:100%;
+  justify-content:space-between;
+  border-radius:12px;
+  background: linear-gradient(180deg,#fff,#fbfeff);
+}
+.proj-badge {
+  background: transparent;
+  border: 1px solid rgba(7,20,34,0.06);
+  color: var(--muted);
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:12px;
+}
+
+/* Project title stronger */
+a.block.p-5 .font-medium { font-weight:800; color:var(--text-900); }
+
+/* EXPERIENCE card refinements */
+.p-4.bg-white.rounded.border {
+  padding:20px;
+  border-radius:12px;
+  background: linear-gradient(180deg,#fff,#fcfeff);
+  display:block;
+}
+.p-4.bg-white.rounded.border .font-medium {
+  font-weight:800;
+  color:var(--text-900);
+}
+.p-4.bg-white.rounded.border ul { margin-top:12px; color:var(--muted); line-height:1.7; }
+
+/* Make Skills & Skill Tambahan cards equal height and centered */
+.pr-sk-container > div { min-height:320px; display:flex; flex-direction:column; justify-content:flex-start; }
+.pr-sk-container .glass { padding:20px; display:flex; flex-direction:column; gap:12px; }
+
+/* smaller elements / label adjustments for cleanliness */
+.skill-label { font-size:12px; color: #1b3b45; font-weight:600; margin-top:8px; }
+.contact-item { background: #ffffff; border-radius:10px; padding:10px 12px; }
+
+/* reduce visual clutter on small screens while keeping look */
+@media (max-width:768px) {
+  .about-card { padding:18px; }
+  a.block.p-5.bg-white.rounded-lg { padding:16px; }
+  .pr-sk-container > div { min-height:auto; }
+}
+
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .card, .glass, .about-card { transition: none; transform: none !important; box-shadow: none !important; }
+}
+
+/* about CV button (posisi di atas kiri card About) */
+.about-cv {
+  position: absolute;
+  left: 18px;
+  top: 6px;
+  transform: none;
+  z-index: 30;
+  padding: .36rem .8rem;
+  font-size: 13px;
+  border-radius: 10px;
+  box-shadow: 0 8px 26px rgba(3,105,161,0.12);
+  background: linear-gradient(90deg, #0b66a3, #0c96d1);
+  color: #fff;
+  font-weight: 700;
+  overflow: hidden; /* needed for shimmer pseudo-element */
+  display: inline-block;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.about-cv:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 44px rgba(3,105,161,0.18);
+}
+
+/* Shimmer/glossy stripe for the CV button (like header shimmer) */
+.about-cv::after {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -60%;
+  width: 40%;
+  height: 120%;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.75) 50%,
+    rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg);
+  filter: blur(6px);
+  opacity: 0.95;
+  pointer-events: none;
+  animation: cv-shimmer 2.2s linear infinite;
+}
+
+/* slightly offset timing to feel natural with header */
+@keyframes cv-shimmer {
+  0%   { left: -60%; }
+  100% { left: 160%; }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .about-cv, .about-cv::after { transition: none !important; animation: none !important; transform: none !important; }
+}
+
+/* ...existing code... */
