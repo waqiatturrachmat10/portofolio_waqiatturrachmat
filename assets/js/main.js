@@ -78,10 +78,81 @@ document.addEventListener('DOMContentLoaded', function () {
       const from = (qmEmail && qmEmail.value.trim()) || '';
       const body = encodeURIComponent(`Dari: ${name}${from ? ' <' + from + '>' : ''}\n\n${(qmMessage && qmMessage.value.trim()) || ''}`);
       const subject = encodeURIComponent('Pesan dari portofolio — ' + name);
-      const mailto = `mailto:<?=htmlspecialchars($site['email'])?>?subject=${subject}&body=${body}`;
+      // NOTE: Pastikan Anda mengganti tag PHP di bawah ini dengan email statis jika ini file .js murni
+      const mailto = `mailto:waqiatturrachmat10@gmail.com?subject=${subject}&body=${body}`;
+      
       // Try to open mail client
       window.location.href = mailto;
       if (qmFeedback) { qmFeedback.textContent = 'Membuka aplikasi email...'; setTimeout(()=>qmFeedback.textContent='',3000); }
     });
   }
 });
+
+      (function(){
+      const btn = document.getElementById('navToggle');
+      const nav = document.getElementById('siteNav');
+      if(!btn || !nav) return;
+
+      // Ensure nav is hidden on small screens by default
+      if(window.innerWidth < 768){
+        nav.classList.add('hidden');
+        nav.setAttribute('aria-hidden','true');
+      }
+
+      // 1. Toggle Menu Hamburger
+      btn.addEventListener('click', () => {
+        const open = btn.classList.toggle('is-open');
+        nav.classList.toggle('hidden', !open);
+        nav.classList.toggle('mobile-open', open);
+        nav.setAttribute('aria-hidden', String(!open)); 
+        btn.setAttribute('aria-expanded', String(open));
+      });
+
+      // 2. LOGIKA BARU UNTUK LINK NAVIGASI
+      const navAnchors = nav.querySelectorAll('a[href^="#"]');
+      navAnchors.forEach(anchor => {
+        anchor.addEventListener('click', () => {
+          // Hanya jika mode mobile, tutup menu saat link diklik
+          if(window.innerWidth < 768){
+            btn.classList.remove('is-open');
+            nav.classList.add('hidden');
+            nav.classList.remove('mobile-open');
+            btn.setAttribute('aria-expanded','false');
+            nav.setAttribute('aria-hidden','true');
+            // Browser akan otomatis scroll ke tujuan (href)
+          }
+        });
+      });
+
+      // 3. Reset saat Resize Window
+      window.addEventListener('resize', () => {
+        if(window.innerWidth >= 768){
+          nav.classList.remove('hidden','mobile-open');
+          btn.classList.remove('is-open');
+          btn.setAttribute('aria-expanded','false');
+        } else {
+           // Jika resize ke mobile, tutup menu dulu
+           if(!btn.classList.contains('is-open')) nav.classList.add('hidden');
+        }
+      });
+      
+      // Close on Escape
+      document.addEventListener('keydown', (e) => {
+        if(e.key === 'Escape'){
+          btn.classList.remove('is-open');
+          nav.classList.add('hidden');
+          nav.classList.remove('mobile-open');
+        }
+      });
+
+      // Click outside to close (mobile)
+      document.addEventListener('click', (e) => {
+        if(window.innerWidth < 768 && btn.classList.contains('is-open')){
+          if(!nav.contains(e.target) && !btn.contains(e.target)){
+            btn.classList.remove('is-open');
+            nav.classList.add('hidden');
+            nav.classList.remove('mobile-open');
+          }
+        }
+      });
+    })();

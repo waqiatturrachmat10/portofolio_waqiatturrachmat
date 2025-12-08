@@ -7,13 +7,34 @@
   --accent-800: #033b5e;
   --glass: rgba(255,255,255,0.6);
   --card-shadow: 0 8px 30px rgba(2,6,23,0.08);
+  /* Tambahan variabel warna untuk konsistensi */
+  --text-900: #071422;
+  --muted: #52656c;
+  --card-bg: #ffffff;
+  --card-radius: 14px;
+  --card-elev: 0 18px 45px rgba(7,20,34,0.08);
+  --accent: linear-gradient(90deg,var(--accent-700),var(--accent-600));
 }
+
+/* --- [BARU] PENGATURAN SCROLL HALUS & JARAK HEADER --- */
+html {
+  scroll-behavior: smooth; /* Membuat animasi scroll otomatis menjadi halus */
+}
+
+section {
+  scroll-margin-top: 100px; /* Memberikan jarak agar judul section tidak tertutup header saat diklik */
+}
+/* ----------------------------------------------------- */
 
 /* teks hover animation (ketika cursor menghampiri tulisan) */
 h1,h2,h3,h4,p,nav a,.proj-badge,.btn-ghost {
   transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
   will-change: transform;
   cursor: default;
+  -webkit-transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
+  -moz-transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
+  -ms-transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
+  -o-transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
 }
 h1:hover,h2:hover,h3:hover,h4:hover,p:hover,nav a:hover,.proj-badge:hover,.btn-ghost:hover {
   transform: translateY(-6px);
@@ -39,8 +60,11 @@ body {
   background: radial-gradient(1200px 600px at 10% 10%, rgba(14,165,233,0.06), transparent 8%),
               radial-gradient(900px 400px at 90% 90%, rgba(3,105,161,0.04), transparent 8%),
               linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
-  color: #06202b;
+  color: var(--text-900); /* Updated to use variable */
   min-height:100vh;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 /* Glass card base */
@@ -74,7 +98,7 @@ body {
 /* contact list (modern, hover) */
 .contact-list { margin-top:12px; display:flex; gap:10px; flex-direction:column; max-width:360px; }
 .contact-item {
-  display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:10px;
+  display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px;
   background:#fff; border:1px solid rgba(2,6,23,0.04); transition: transform .14s ease, box-shadow .14s ease, background .14s;
 }
 .contact-item:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(3,57,90,0.06); background: linear-gradient(90deg, rgba(3,90,130,0.03), rgba(11,117,185,0.02)); color:var(--accent-800); }
@@ -393,24 +417,6 @@ img, object, iframe { max-width:100%; height:auto; }
   .cert-modal-close { font-size:22px; top:6px; right:8px; }
 }
 
-/* Modern, elegant & simple card refinements + darker text */
-:root {
-  --text-900: #071422; /* very dark slate for stronger contrast */
-  --muted: #52656c;
-  --card-bg: #ffffff;
-  --card-radius: 14px;
-  --card-elev: 0 18px 45px rgba(7,20,34,0.08);
-  --accent: linear-gradient(90deg,var(--accent-700),var(--accent-600));
-}
-
-/* Global text color stronger (more "hitam") */
-body {
-  color: var(--text-900);
-  font-family: 'Poppins', 'Inter', sans-serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-
 /* Headings heavier and clear */
 h1, h2, h3, h4 {
   color: var(--text-900);
@@ -435,22 +441,6 @@ h1, h2, h3, h4 {
   transform: translateY(-8px);
   box-shadow: 0 26px 64px rgba(7,20,34,0.12);
 }
-
-/* ABOUT card specific: cleaner layout */
-.about-card {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px 18px;         /* lebih ringkas agar card tidak terlalu tinggi */
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;    /* isi dimulai dari atas, bukan center */
-  text-align: justify;
-  max-height: 380px;          /* batasi tinggi agar card tidak ambles */
-  overflow: auto;             /* scroll bila konten melebihi batas */
-}
-.about-card h2 { text-align:center; font-weight:800; }
-.about-text { max-width:880px; color:var(--text-900); font-weight:500; }
 
 /* PROJECT card refinements */
 a.block.p-5.bg-white.rounded-lg {
@@ -488,26 +478,6 @@ a.block.p-5 .font-medium { font-weight:800; color:var(--text-900); }
   color:var(--text-900);
 }
 .p-4.bg-white.rounded.border ul { margin-top:12px; color:var(--muted); line-height:1.7; }
-
-/* Make Skills & Skill Tambahan cards equal height and centered */
-.pr-sk-container > div { min-height:320px; display:flex; flex-direction:column; justify-content:flex-start; }
-.pr-sk-container .glass { padding:20px; display:flex; flex-direction:column; gap:12px; }
-
-/* smaller elements / label adjustments for cleanliness */
-.skill-label { font-size:12px; color: #1b3b45; font-weight:600; margin-top:8px; }
-.contact-item { background: #ffffff; border-radius:10px; padding:10px 12px; }
-
-/* reduce visual clutter on small screens while keeping look */
-@media (max-width:768px) {
-  .about-card { padding:18px; }
-  a.block.p-5.bg-white.rounded-lg { padding:16px; }
-  .pr-sk-container > div { min-height:auto; }
-}
-
-/* Respect reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  .card, .glass, .about-card { transition: none; transform: none !important; box-shadow: none !important; }
-}
 
 /* about CV button (posisi di atas kiri card About) */
 .about-cv {
@@ -562,4 +532,67 @@ a.block.p-5 .font-medium { font-weight:800; color:var(--text-900); }
   .about-cv, .about-cv::after { transition: none !important; animation: none !important; transform: none !important; }
 }
 
-/* ...existing code... */
+/* Hamburger (mobile) */
+.hamburger{
+  display:inline-block;
+  width:22px;
+  height:2px;
+  background:var(--accent-800,#0f172a);
+  position:relative;
+  transition:background .15s ease;
+}
+.hamburger::before,.hamburger::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:22px;
+  height:2px;
+  background:var(--accent-800,#0f172a);
+  transition:transform .22s ease, top .22s ease, bottom .22s ease, opacity .18s ease;
+}
+.hamburger::before{ top:-7px; }
+.hamburger::after{ bottom:-7px; }
+/* open -> X */
+button#navToggle.is-open .hamburger{ background:transparent; }
+button#navToggle.is-open .hamburger::before{ transform: translateY(7px) rotate(45deg); }
+button#navToggle.is-open .hamburger::after{ transform: translateY(-7px) rotate(-45deg); }
+
+/* mobile dropdown nav */
+.site-nav.mobile-open{
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+  position:absolute;
+  top:64px;
+  right:1.5rem;
+  background:var(--card-bg, #fff);
+  padding:.75rem 1rem;
+  border-radius:8px;
+  box-shadow:0 10px 30px rgba(2,6,23,0.08);
+  /* REVISI: Pastikan z-index sangat tinggi */
+  z-index:999 !important; 
+}
+@media (min-width:768px){
+  .site-nav.mobile-open{ position:static; display:flex !important; flex-direction:row; gap:1rem; background:transparent; padding:0; box-shadow:none; }
+}
+/* force-hide nav on small devices */
+@media (max-width:767px){
+  .site-nav{ display:none !important; }
+  .site-nav.mobile-open{ display:flex !important; flex-direction:column; }
+}
+
+@media (min-width:768px){
+  .site-nav{ display:flex !important; flex-direction:row; gap:1rem; }
+  .site-nav.mobile-open{ position:static; display:flex !important; flex-direction:row; gap:1rem; background:transparent; padding:0; box-shadow:none; }
+}
+
+/* position hamburger button inside header on small screens */
+button#navToggle{
+  position: absolute;
+  right: 1.5rem;
+  top: 1.25rem;
+  z-index: 60;
+}
+@media (min-width:768px){
+  button#navToggle{ position: static; }
+}

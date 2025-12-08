@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -12,6 +12,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link rel="stylesheet" href="assets/css/styles.css">
+
 </head>
 <body class="antialiased">
 
@@ -25,7 +26,7 @@
       </svg>
     </div>
 
-    <header class="max-w-6xl mx-auto px-6 py-6 flex items-start justify-between relative z-10" id="siteHeader">
+    <header class="max-w-6xl mx-auto px-6 py-6 flex items-start justify-between relative z-50" id="siteHeader">
       <div class="flex items-start gap-4">
         <div class="header-left">
           <div class="header-brand">
@@ -70,7 +71,6 @@
         </div>
 
         <div class="mt-6 pr-sk-container grid md:grid-cols-2 gap-6">
-          
           <div class="glass p-5 reveal" data-reveal>
             <h3 class="font-medium text-slate-800 mb-3">Skills</h3>
             <div class="skill-grid">
@@ -130,9 +130,7 @@
                 </div>
                 <div class="p-3 bg-white rounded-lg flex items-start gap-3 hoverable">
                   <div class="w-9 h-9 rounded-md bg-[var(--accent-700)] text-white flex items-center justify-center font-semibold">•</div>
-                  <div class="text-sm text-slate-700">AI Prompt Engineer: Mahir merancang dan menyusun prompt untuk model AI agar menghasilkan output yang akurat dan relevan.    
-                </div>
-                </div>
+                  <div class="text-sm text-slate-700">AI Prompt Engineer: Mahir merancang dan menyusun prompt untuk model AI agar menghasilkan output yang akurat dan relevan.</div>
                 </div>
                 <div class="p-3 bg-white rounded-lg flex items-start gap-3 hoverable">
                   <div class="w-9 h-9 rounded-md bg-[var(--accent-700)] text-white flex items-center justify-center font-semibold">•</div>
@@ -168,9 +166,7 @@
                   <h4 class="font-medium text-slate-900">Sistem Rekomendasi Investasi</h4>
                   <div class="proj-badge">PHP, SQlite, Tailwind, JS, Phyton</div>
                 </div>
-                <p class="text-sm text-slate-600 mt-3"> Sistem  yang  mampu  memudahkan 
-  seseorang untuk mengelola keuangan pribadi dan memberikan saran investasi secara otomatis, 
-  logis, dan terpersonalisasi. </p>
+                <p class="text-sm text-slate-600 mt-3"> Sistem yang mampu memudahkan seseorang untuk mengelola keuangan pribadi dan memberikan saran investasi secara otomatis, logis, dan terpersonalisasi. </p>
               </a>
 
               <a href="project/website_berita_sepakbola.pdf" target="_blank" rel="noopener noreferrer" class="block p-5 bg-white rounded-lg border border-slate-100 hover:shadow-lg transition transform hover:-translate-y-1 reveal card hoverable" data-reveal>
@@ -178,10 +174,8 @@
                   <h4 class="font-medium text-slate-900">Website Berita Sepakbola</h4>
                   <div class="proj-badge">PHP, MySQL, Tailwind, JS</div>
                 </div>
-                <p class="text-sm text-slate-600 mt-3"> Ini 
-  adalah sebuah Proyek Content Management System (CMS) sederhana untuk portal berita sepak bola.</p>
+                <p class="text-sm text-slate-600 mt-3"> Ini adalah sebuah Proyek Content Management System (CMS) sederhana untuk portal berita sepak bola.</p>
               </a>
-
           </div>
         </div>
       </section>
@@ -303,6 +297,7 @@
       </div>
     </footer>
   </div>
+
 
   <script src="assets/js/main.js" defer></script>
 </body>
